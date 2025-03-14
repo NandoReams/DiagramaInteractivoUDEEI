@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=0.67">
+  <title>Diagrama Interactivo UDEEI</title>
+  <style>
+    /* Estilos generales */
+    body {
+      
+      text-align: justify;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    /* Contenedor del diagrama (Venn y figuras externas) */
+    .venn-container {
+      position: relative;
+      width: 500px;
+      height: 500px;
+    }
+    /* ------------------------------ */
+    /* CÍRCULOS (Diagrama de Venn)    */
+    /* ------------------------------ */
+    .circle {
+
+        
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background-color: rgba(0, 123, 255, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.3s;
+      cursor: pointer;
+      text-align: center;
+      padding: 10px;
+    }
+    /* Efecto hover para círculos: acercamiento */
+    .circle:hover {
+        background-color: rgba(0, 123, 255, 1);
+      transform: scale(3);
+      align-items:-200px;
+      z-index: 3;
+      opacity: 100;
+    }
+    
+
+    .circle:hover .titlecircle{
+    transform: translateX(0%) translateY(-80px);
+    z-index: 4;
+    }
+    .circle:hover .titlecircle2{
+    transform: translateX(0%) translateY(-80px);
+    font-size: px;
+    z-index: 4;
+    }
+    .circle:hover .titlecircle3{
+    transform: translateX(0%) translateY(-80px);
+    font-size: px;
+    z-index: 4;
+    }
+    .titlecircle{
+      transform: translateX(0%) translateY(-20px);
+    }.titlecircle2{
+      transform: translateX(-20%) translateY(10px);
+    }.titlecircle3{
+      transform: translateX(20%) translateY(10px);
+    }
+
+    /* Efecto hover para desplegar información (detalle) en círculos */
+    .circle .detail {
+      
+      text-align: justify;
+        z-index: 1;
+      position: absolute;
+      top: center;
+      left: 50%;
+      opacity: 0;
+      transition: opacity 0s, transform 0s;
+      font-size: 1px;
+      white-space: nowrap;
+    }.circle:hover .detail {
+      
+      text-align: justify;
+      color: #f0f0f0;
+        align-items:center;
+      opacity: 1;
+      transform: translateX(-50%) translateY(-10%);
+      z-index: 5;
+  font-size: 7px;
+    }
+    /* Posicionamiento específico de cada círculo */
+    /* Círculo: Contexto escolar */
+    #circle-escolar {
+      top: 200px;
+      left: 150px;
+    }
+    /* Círculo: Contexto familiar */
+    #circle-familiar {
+      top: 325px;
+      left: 075px;
+    }
+    /* Círculo: Contexto aulico */
+    #circle-aulico {
+      top: 325px;
+      left: 225px;
+    }
+    /* Texto central en el diagrama: UDEEI */
+    .center-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, 87px);
+      font-weight: bold;
+      font-size: 24px;
+    }
+    .circle:hover ~ .container{
+        opacity: 0;
+        pointer-events: none;
+    }
+    /* ------------------------------ */
+    /* RECTÁNGULOS (Figuras externas) */
+    /* ------------------------------ */
+    .rectangle {
+  position: absolute;
+  width: 150px;
+  height: 80px;
+  background-color: #28a745;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s, background-color 0.3s, opacity 0.3s;
+  cursor: pointer;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  transform-origin: center;
+}.rectangle1 {
+  font-size: 50px; 
+  position: absolute;
+  width: 1700px;
+  height: 150px;
+  transform: translate(-45%, -180px);
+  background-color: #28a745;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s, background-color 0.3s, opacity 0.3s;
+  cursor: pointer;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  transform-origin: center;
+}
+
+.rectangle:hover {
+  
+  background-color: rgba(0, 123, 255, 1);
+  transform: scale(3); /* Se agranda correctamente */
+  z-index: 20; /* Mayor prioridad para que quede arriba */
+  opacity: 1;
+}
+
+/* Estilo del título dentro del rectángulo */
+.rectangle .titlerec {
+    font-weight: bold;
+    transition: transform 0.3s;
+}.rectangle .titlerec5 {
+    font-weight: bold;
+    transition: transform 0.3s;
+}
+
+.rectangle:hover .titlerec {
+        align-items:top;
+      opacity: 100;
+      transform: translateX(0%) translateY(-200%);
+      z-index: 5;
+    }.rectangle:hover .titlerec5 {
+        align-items:top;
+      opacity: 100;
+      transform: translateX(0%) translateY(-220%);
+      z-index: 5;
+    }.rectangle:hover .titlerec3 {
+        align-items:top;
+      opacity: 100;
+      transform: translateX(0%) translateY(-240%);
+      z-index: 5;
+    }
+    .titlerec{
+      transform: translateX(0%) translateY(0px);
+    }.titlerec5{
+      transform: translateX(0%) translateY(0px);
+    }.titlerec3{
+      transform: translateX(0%) translateY(0px);
+    }
+/* Estilo para el detalle dentro del rectángulo */
+.rectangle .detail {
+  z-index: 1;
+      color: #f0f0f0;
+  text-align: justify;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0s, transform 0s;
+  font-size: 1px;
+  color: #333;
+  white-space: nowrap;
+}.rectangle .detail5 {
+  z-index: 1;
+      color: #f0f0f0;
+  text-align: justify;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-10%);
+  opacity: 0;
+  transition: opacity 0s, transform 0s;
+  font-size: 1px;
+  color: #333;
+  white-space: nowrap;
+}.rectangle .detail6 {
+  z-index: 1;
+      color: #f0f0f0;
+  text-align: justify;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-10%);
+  opacity: 0;
+  transition: opacity 0s, transform 0s;
+  font-size: 1px;
+  color: #333;
+  white-space: nowrap;
+}
+
+.rectangle:hover .detail {
+  
+      color: #f0f0f0;
+  text-align: justify;
+  opacity: 1;
+  transform: translateX(-50%) translateY(-80px);
+  z-index: 5;
+  font-size: 7px;
+}.rectangle:hover .detail5 {
+  
+  text-align: justify;
+      color: #f0f0f0;
+  opacity: 1;
+  transform: translateX(-50%) translateY(-85px);
+  z-index: 5;
+  font-size: 5px;
+}.rectangle:hover .detail6 {
+  
+  text-align: justify;
+      color: #f0f0f0;
+  opacity: 1;
+  transform: translateX(-50%) translateY(-80px);
+  z-index: 5;
+  font-size: 4px;
+}
+
+/* Ajuste de posicionamiento de cada rectángulo */
+#rect-contextualizacion {
+  top: -10px;
+  left: 35%;
+}
+#rect-impacto {
+  top: 50%;
+  left: -200px;
+}
+#rect-necesidad {
+  bottom: -240px;
+  left: 65%;
+}
+#rect-bap {
+  top: 50%;
+  right: -200px;
+}
+#rect-dia {
+  bottom: -240px;
+  right: 365px;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+<!-- Contenedor principal del diagrama -->
+<div class="venn-container">
+  <!-- =========================== -->
+  <!-- DIAGRAMA DE VENN (CÍRCULOS) -->
+  <!-- =========================== -->
+  
+  <!-- Círculo: Contexto escolar -->
+  <div class="circle" id="circle-escolar" >
+    <div class="titlecircle">Contexto escolar</div>
+    <!-- Información desplegable al hacer hover -->
+    <div class="detail">
+      &bull; Plantel ubicado en Campo Encantado <br>
+      No. 50, Alcaldía Azcapotzalco.<br><br>
+&bull; Matrícula total de la escuela son 56 alumnos,<br>
+ organizados en 5 grupos de 1° A, 2° A, 2° B, 3° A y<br>
+  3° B.<br><br>
+&bull; La plantilla del plantel está integrada por 5<br>
+ docentes educadoras, directora, trabajador manual, <br>
+ especialista en música, educación física y UDEEI.<br>
+    </div>
+  </div>
+  
+  <!-- Círculo: Contexto familiar -->
+  <div class="circle" id="circle-familiar">
+    <div class="titlecircle2">Contexto familiar</div>
+    <!-- Información desplegable al hacer hover -->
+    <div class="detail"><br><br>
+      &bull; Nivel socioeconómico de la mayoría de los padres 
+      <br>de familia es bajo por lo que tienen la necesidad de 
+      <br>emplearse para un mayor ingreso económico.<br><br>
+      &bull; El nivel educativo de los padres de familia es de <br>primaria y secundaria.<br><br>
+      &bull; Los estilo de  crianza genera pocas oportunidades <br>
+       de desarrollo en las habilidades comunicativas y en la <br>
+       autonomía de los niños y niñas.<br><br>
+      &bull; En la relación que las familias establecen los <br>
+      adultos son  quienes resuelven  las necesidades del alumno.</div>
+  </div>
+  
+  <!-- Círculo: Contexto aulico -->
+  <div class="circle" id="circle-aulico">
+    <div class="titlecircle3">Contexto áulico</div>
+    <!-- Información desplegable al hacer hover -->
+    <div class="detail">&bull;Después del análisis se determina la <br>
+      implementación de la Estrategia Diversificada Desarrollo<br>
+       de la Inteligencia a través del Arte.<br><br>
+       &bull;En primer momento el aula seleccionada para el desarrollo<br>
+       e implementación de la estrategia diversificada fue  1° <br>
+       grado en la cual se encontraba el alumno “N” con <br>
+       diagnóstico de nistagmo y dificultades severas de <br>
+       comunicación. 
+      </div>
+  </div>
+  
+  <!-- Texto central del diagrama: UDEEI -->
+  <div class="center-text"style="top: 300px;
+  left:259px;
+  font-size: 15px;
+  ">UDEEI</div>
+  
+  <!-- =========================== -->
+  <!-- FIGURAS RECTANGULARES (BOTONES) -->
+  <!-- =========================== -->
+  
+  <!-- Rectángulo: Contextualizacion -->
+ <div class="rectangle1" id="rect-contextualizacion">
+  <span>Diálogos por una muy otra enseñanza a través del Desarrollo de la Inteligencia a través del Arte (DIA)</span>
+</div>
+
+  <!-- Rectángulo: Impacto -->
+  <div class="rectangle" id="rect-impacto">
+    <div class="titlerec3">Impacto</div>
+    <!-- Información desplegable al hacer hover -->
+    <div class="detail6">
+      La  docente titular en corresponsabilidad<br>
+       con la maestra especialista y directora del <br>
+      plantel logramos  crear un ambiente de <br>
+      aprendizaje en el que los niños y niñas se  <br>
+      escucharan, respetaran y apreciaran las ideas<br>
+       de sus compañeros.<br><br>
+      Todos tuvieran  las mismas oportunidades de <br>
+      participar y expresar libremente su opinión y<br>
+       observación.<br><br>
+      Se logro la participación activa de padres de<br>
+       familia en la estrategia diversificada DIA, <br>
+       teniendo la oportunidad de observar el <br>
+       desenvolvimiento de sus hijos y sus avances <br>
+       en el desarrollo de habilidades comunicativas. <br> 
+      </div>
+  </div>
+  
+  <!-- Rectángulo: Necesidad identificada -->
+  <div class="rectangle" id="rect-necesidad">
+    <div class="titlerec">Necesidad</div>
+    <!-- Información desplegable al hacer hover -->
+    <div class="detail"><br>
+      &bull;Una de las necesidades identificadas desde 
+      <br>el programa
+       Analítico de la escuela es que en <br>las dinámicas familiares 
+       existen <br>pocas oportunidades para la expresión oral de los<br> 
+       alumnos y alumnas. 
+    </div>
+  </div>
+  
+  <!-- Rectángulo: BAP -->
+  <div class="rectangle" id="rect-bap">
+    <div class="titlerec">BAP</div>
+    <!-- Información desplegable al hacer hover -->
+    <div class="detail"><br>
+            (Barrera para el Aprendizaje y la Participación)<br><br>
+            &bull;La BAP identificada es de  índole práctica-didáctica,<br>
+              generada por la}falta de una metodología didáctica <br>
+              accesible, debido al desconocimiento de estrategias<br>
+              diversificadas o especificas para favorecer la <br>
+              atención de todo el estudiantado.  </div>
+  </div>
+  
+  <!-- Rectángulo: DIA -->
+  <div class="rectangle" id="rect-dia">
+    <div class="titlerec5">DIA</div>
+    <!-- Información desplegable al hacer hover -->
+    <div class="detail5"><br>(Desarrollo de la Inteligencia a través del Arte)<br><br>
+      
+ &bull;Programa DIA, es una metodología didáctica<br>
+      que aprovecha el arte visual como estímulo para<br>
+      desarrollar la inteligencia en alumnos y maestros.<br><br>
+      &bull;Consiste en la generación de un diálogo en torno a<br>
+      obras de arte visual dentro de un espacio de libre <br>
+      expresión de experiencias, opiniones y <br>
+      conocimientos, en el cual el maestro mediador -a <br>
+      través del fomento a la construcción de aprendizajes<br>
+       y del desarrollo de habilidades cognitivas, <br>
+       afectivas, comunicativas y sociales- motiva la <br>
+       participación activa de los alumnos.<br>
+      </div>
+  </div>
+  </div><br>
+<br>
+<br>
+</div>
+
+</body>
+</html>
